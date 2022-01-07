@@ -11,7 +11,8 @@ dwDesiredAccess = PROCESS_ALL_ACCESS
 bInheritHandle = False
 
 # grep from window task manager, in hexadecimal
-dwProcessId = int(hex(2100))
+PID = input("Insert PID number you want to handle: ")
+dwProcessId = int(hex(PID))
 print(f"dwProcessId = {dwProcessId}")
 
 # error handling
