@@ -12,7 +12,7 @@ bInheritHandle = False
 
 # grep from window task manager, in hexadecimal
 PID = input("Insert PID number you want to handle: ")
-dwProcessId = int(hex(PID))
+dwProcessId = int(hex(int(PID)))
 print(f"dwProcessId = {dwProcessId}")
 
 # error handling
