@@ -1,15 +1,14 @@
 import ctypes
-from ctypes.wintypes import HANDLE, DWORD, WORD, LPSTR, LPBYTE
-# from ctypes.wintypes import HANDLE, DWORD, WORD, LPWSTR, LPBYTE
+from ctypes.wintypes import HANDLE, DWORD, WORD, LPWSTR, LPBYTE
 
 kernel_handle = ctypes.windll("Kernel32.dll")
 
 """
-typedef struct _STARTUPINFOA {
+typedef struct _STARTUPINFOW {
   DWORD  cb;
-  LPSTR  lpReserved;
-  LPSTR  lpDesktop;
-  LPSTR  lpTitle;
+  LPWSTR lpReserved;
+  LPWSTR lpDesktop;
+  LPWSTR lpTitle;
   DWORD  dwX;
   DWORD  dwY;
   DWORD  dwXSize;
@@ -24,15 +23,15 @@ typedef struct _STARTUPINFOA {
   HANDLE hStdInput;
   HANDLE hStdOutput;
   HANDLE hStdError;
-} STARTUPINFOA, *LPSTARTUPINFOA;
+} STARTUPINFOW, *LPSTARTUPINFOW;
 """
 # structure for STARTUPINFOA
-class STARTUPINFOA(ctypes.Structure):
+class STARTUPINFOW(ctypes.Structure):
     _fields_ = [
         ("cb", DWORD),
-        ("lpReserved", LPSTR),
-        ("lpDesktop", LPSTR),
-        ("lpTitle", LPSTR),
+        ("lpReserved", LPWSTR),
+        ("lpDesktop", LPWSTR),
+        ("lpTitle", LPWSTR),
         ("dwX", DWORD),
         ("dwY", DWORD),
         ("dwXSize", DWORD),
@@ -48,7 +47,7 @@ class STARTUPINFOA(ctypes.Structure):
         ("hStdOutput", HANDLE),
         ("hStdError", HANDLE)
     ]
-startupinfoa_handle = STARTUPINFOA()
+startupinfow_handle = STARTUPINFOW()
 
 """
 typedef struct _PROCESS_INFORMATION {
@@ -91,7 +90,7 @@ bInheritHandles = False
 dwCreationFlags = 0x00000010    # creating new console
 lpEnvironment = None
 lpCurrentDirectory = None
-lpStartupInfo = STARTUPINFOA()
+lpStartupInfo = STARTUPINFOW()
 lpStartupInfo.wShowWindow = 0x1
 lpStartupInfo.dwFlags = 0x1
 lpProcessInformation = PROCESS_INFORMATION()
